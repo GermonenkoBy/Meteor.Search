@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Meteor.Search.Api.Grpc";
+
+package meteor.search;
+
+enum OrderDirection {
+  ORDER_DIRECTION_ASC = 0;
+  ORDER_DIRECTION_DESC = 1;
+}

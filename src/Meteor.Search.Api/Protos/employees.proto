@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option csharp_namespace = "Meteor.Search.Api.Grpc";
+
+package meteor.search;
+
+import "Protos/shared.proto";
+
+enum EmployeeStatus {
+  EMPLOYEE_STATUS_UNSPECIFIED = 0;
+  EMPLOYEE_STATUS_INACTIVE = 1;
+  EMPLOYEE_STATUS_ACTIVE = 2;
+  EMPLOYEE_STATUS_TERMINATED = 3;
+  EMPLOYEE_STATUS_ON_LEAVE = 4;
+}
+
+enum EmployeeOrderField {
+  EMPLOYEE_ORDER_FIELD_EMAIL_ADDRESS = 0;
+  EMPLOYEE_ORDER_FIELD_PHONE_NUMBER = 1;
+  EMPLOYEE_ORDER_FIELD_FIRST_NAME = 2;
+  EMPLOYEE_ORDER_FIELD_LAST_NAME = 3;
+}
+
+message Employee {
+  int32 id = 1;
+  string email_address = 2;
+  string phone_number = 3;
+  string first_name = 4;
+  string last_name = 5;
+  EmployeeStatus status = 6;
+}
+
+message EmployeeOrder {
+  EmployeeOrderField order = 1;
+  meteor.search.OrderDirection direction = 2;
+}
+
+message EmployeesFilter {
+  optional string query = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+  optional EmployeeStatus status = 4;
+  repeated EmployeeOrder order = 5;
+}
+
+message EmployeesPage {
+  repeated Employee employees = 1;
+  int32 total = 2;
+}
+
+service EmployeesSearchService {
+  rpc SearchEmployees (EmployeesFilter) returns (EmployeesPage);
+}
