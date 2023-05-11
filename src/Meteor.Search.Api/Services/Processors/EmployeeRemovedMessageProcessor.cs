@@ -48,11 +48,11 @@ public class EmployeeRemovedMessageProcessor
             return;
         }
 
-        var customerDataAccessor = scope.ServiceProvider.GetRequiredService<SimpleCustomerDataAccessor>();
+        var customerDataAccessor = scope.ServiceProvider.GetRequiredService<ICustomerDataAccessor>();
         customerDataAccessor.Customer = customer;
         customerDataAccessor.CustomerSettings = customerSettings;
 
-        var customersService = scope.ServiceProvider.GetRequiredService<IEmployeesStore>();
+        var customersService = scope.ServiceProvider.GetRequiredService<IEmployeesService>();
 
         await customersService.RemoveEmployeeAsync(message.EmployeeId);
     }

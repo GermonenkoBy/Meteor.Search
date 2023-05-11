@@ -1,8 +1,6 @@
 ﻿namespace Meteor.Search.Api.Dtos;
 
-public record RemoveEmployeeMessage
+public record RemoveEmployeeMessage : CustomerBasedMessage
 {
-    public int EmployeeId;
-
-    public int CustomerId;
+    public int EmployeeId { get; set; }
 }

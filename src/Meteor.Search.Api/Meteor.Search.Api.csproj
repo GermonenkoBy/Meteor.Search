@@ -4,6 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>5c73ac58-3bc8-4e2b-99a1-ed3d412bcc13</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,6 +17,8 @@
         <PackageReference Include="Grpc.AspNetCore" Version="2.53.0" />
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.53.0" />
         <PackageReference Include="Mapster" Version="7.3.0" />
+        <PackageReference Include="MassTransit" Version="8.0.15" />
+        <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.0.15" />
         <PackageReference Include="Microsoft.Extensions.Azure" Version="1.6.3" />
         <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="6.0.1" />
     </ItemGroup>

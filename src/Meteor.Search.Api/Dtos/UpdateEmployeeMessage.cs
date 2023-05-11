@@ -4,21 +4,18 @@ using Meteor.Search.Core.Models.Enums;
 
 namespace Meteor.Search.Api.Dtos;
 
-public record struct UpdateEmployeeMessage
+public record UpdateEmployeeMessage : CustomerBasedMessage
 {
     [AdaptMember(nameof(Employee.Id))]
-    public int EmployeeId;
+    public int EmployeeId { get; set; }
 
-    [AdaptIgnore]
-    public int CustomerId;
+    public string FirstName { get; set; } = string.Empty;
 
-    public string FirstName;
+    public string LastName { get; set; } = string.Empty;
 
-    public string LastName;
+    public string EmailAddress { get; set; } = string.Empty;
 
-    public string EmailAddress;
+    public string PhoneNumber { get; set; } = string.Empty;
 
-    public string PhoneNumber;
-
-    public EmployeeStatuses Status;
+    public EmployeeStatuses Status { get; set; }
 }

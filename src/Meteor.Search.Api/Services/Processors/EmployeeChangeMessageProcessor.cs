@@ -35,7 +35,7 @@ public class EmployeeChangeMessageProcessor
         if (customer is null)
         {
             _logger.LogError(
-                "Unable to process employee {EmployeeId}: customer {CustomerId} was not found", 
+                "Unable to process employee {EmployeeId}: customer {CustomerId} was not found",
                 message.EmployeeId,
                 message.CustomerId
             );
@@ -46,18 +46,18 @@ public class EmployeeChangeMessageProcessor
         if (customerSettings?.FullTextSearchApiKey is null)
         {
             _logger.LogError(
-                "Unable to process employee {EmployeeId}: customer settings are not setup for customer {CustomerId}", 
+                "Unable to process employee {EmployeeId}: customer settings are not setup for customer {CustomerId}",
                 message.EmployeeId,
                 message.CustomerId
             );
             return;
         }
 
-        var customerDataAccessor = scope.ServiceProvider.GetRequiredService<SimpleCustomerDataAccessor>();
+        var customerDataAccessor = scope.ServiceProvider.GetRequiredService<ICustomerDataAccessor>();
         customerDataAccessor.Customer = customer;
         customerDataAccessor.CustomerSettings = customerSettings;
 
-        var customersService = scope.ServiceProvider.GetRequiredService<IEmployeesStore>();
+        var customersService = scope.ServiceProvider.GetRequiredService<IEmployeesService>();
 
         var employee = _mapper.Map<Core.Models.Employee>(message);
         await customersService.SaveEmployeeAsync(employee);

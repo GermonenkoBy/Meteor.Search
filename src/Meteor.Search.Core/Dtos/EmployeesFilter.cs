@@ -1,5 +1,4 @@
-﻿using Meteor.Search.Core.Dtos.Enums;
-using Meteor.Search.Core.Models.Enums;
+﻿using Meteor.Search.Core.Models.Enums;
 
 namespace Meteor.Search.Core.Dtos;
 
@@ -11,7 +10,7 @@ public record EmployeesFilter
 
     public string? Query { get; set; }
 
-    public EmployeeStatuses? Status { get; set; }
+    public List<EmployeeStatuses> Statuses { get; set; } = new();
 
-    public List<OrderDirections> Order { get; set; } = new();
+    public List<Order> Order { get; set; } = new();
 }

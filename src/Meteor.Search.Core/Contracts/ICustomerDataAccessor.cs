@@ -4,7 +4,7 @@ namespace Meteor.Search.Core.Contracts;
 
 public interface ICustomerDataAccessor
 {
-    public Customer? Customer { get; }
+    public Customer? Customer { get; set; }
 
-    public CustomerSettings? CustomerSettings { get; }
+    public CustomerSettings? CustomerSettings { get; set; }
 }

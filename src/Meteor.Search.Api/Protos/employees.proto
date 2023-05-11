@@ -31,15 +31,15 @@ message Employee {
 }
 
 message EmployeeOrder {
-  EmployeeOrderField order = 1;
+  EmployeeOrderField field = 1;
   meteor.search.OrderDirection direction = 2;
 }
 
-message EmployeesFilter {
+message SearchEmployeesRequest {
   optional string query = 1;
   int32 offset = 2;
   int32 limit = 3;
-  optional EmployeeStatus status = 4;
+  repeated EmployeeStatus statuses = 4;
   repeated EmployeeOrder order = 5;
 }
 
@@ -49,5 +49,5 @@ message EmployeesPage {
 }
 
 service EmployeesSearchService {
-  rpc SearchEmployees (EmployeesFilter) returns (EmployeesPage);
+  rpc SearchEmployees (SearchEmployeesRequest) returns (EmployeesPage);
 }

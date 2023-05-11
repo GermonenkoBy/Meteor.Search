@@ -2,7 +2,7 @@
 
 namespace Meteor.Search.Core.Services.Contracts;
 
-public interface IEmployeesStore
+public interface IEmployeesService
 {
     Task SaveEmployeeAsync(Employee employee);
 

@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Enums.NET" Version="4.0.1" />
+      <PackageReference Include="Meteor.Common.Core" Version="1.0.0" />
+    </ItemGroup>
+
 </Project>

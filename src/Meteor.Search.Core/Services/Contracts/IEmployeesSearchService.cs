@@ -5,5 +5,5 @@ namespace Meteor.Search.Core.Services.Contracts;
 
 public interface IEmployeesSearchService
 {
-    Task<(ICollection<Employee> Items, int Total)> SearchAsync(EmployeesFilter filter);
+    Task<(IReadOnlyCollection<Employee> Items, int Total)> SearchAsync(EmployeesFilter filter);
 }
