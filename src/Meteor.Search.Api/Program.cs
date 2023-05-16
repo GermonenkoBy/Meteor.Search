@@ -1,11 +1,8 @@
 using Grpc.Core;
 using Mapster;
 using MapsterMapper;
-using MassTransit;
 using Meilisearch;
-using Meteor.Search.Api.Consumers;
-using Meteor.Search.Api.Dtos;
-using Meteor.Search.Api.Filters;
+using Meteor.Search.Api.Extensions;
 using Meteor.Search.Api.Middleware;
 using Meteor.Search.Api.Services.Grpc;
 using Meteor.Search.Api.Services.Http;
@@ -80,32 +77,6 @@ builder.Services.AddTransient<EmployeeRemovedMessageProcessor>();
 var mapperConfiguration = new TypeAdapterConfig();
 mapperConfiguration.Apply(new Meteor.Search.Infrastructure.Mapping.MappingRegister());
 builder.Services.AddSingleton<IMapper>(new Mapper(mapperConfiguration));
-
-var serviceBusConnectionString = builder.Configuration.GetConnectionString("AzureServiceBus") ?? string.Empty;
-builder.Services.AddMassTransit(options =>
-{
-    options.AddConsumer<UpdateEmployeeConsumer>();
-
-    options.UsingAzureServiceBus((context, config) =>
-    {
-        config.Host(serviceBusConnectionString);
-
-        config.UseConsumeFilter<MessageLoggingFilter>(context);
-
-        config.SubscriptionEndpoint<UpdateEmployeeMessage>(
-            "employee-changed",
-            endpoint =>
-            {
-                endpoint.ConcurrentMessageLimit = 1;
-
-                endpoint.UseConsumeFilter<CustomerDataPropagationFilter<UpdateEmployeeMessage>>(context);
-                endpoint.ConfigureConsumer<UpdateEmployeeConsumer>(context);
-            }
-        );
-
-        config.ConfigureEndpoints(context);
-    });
-});
 
 var app = builder.Build();
 
